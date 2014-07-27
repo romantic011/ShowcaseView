@@ -14,35 +14,26 @@
  * limitations under the License.
  */
 
-buildscript {
-    repositories {
-        mavenCentral()
+package com.github.amlcurran.showcaseview;
+
+import android.annotation.TargetApi;
+import android.os.Build;
+import android.view.View;
+
+public class ApiUtils {
+
+    public boolean isCompatWith(int versionCode) {
+        return Build.VERSION.SDK_INT >= versionCode;
     }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.0'
+    public boolean isCompatWithHoneycomb() {
+        return isCompatWith(Build.VERSION_CODES.HONEYCOMB);
     }
-}
 
-apply plugin: 'com.android.library'
-apply plugin: 'maven'
-
-dependencies {
-    repositories {
-        mavenCentral()
-    }
-}
-
-android {
-    compileSdkVersion Integer.parseInt(COMPILE_SDK)
-    buildToolsVersion BUILD_TOOLS_VERSION
-
-    defaultConfig {
-        versionName VERSION_NAME
-        versionCode Integer.parseInt(VERSION_CODE)
-        targetSdkVersion Integer.parseInt(TARGET_SDK)
-        minSdkVersion Integer.parseInt(MIN_SDK)
+    @TargetApi(14)
+    public void setFitsSystemWindowsCompat(View view) {
+        if (isCompatWith(Build.VERSION_CODES.ICE_CREAM_SANDWICH)) {
+            view.setFitsSystemWindows(true);
+        }
     }
 }
-
-apply from: 'gradle-mvn-push.gradle'

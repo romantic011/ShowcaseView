@@ -1,7 +1,3 @@
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
-}
-
 /*
  * Copyright 2014 Alex Curran
  *
@@ -18,15 +14,21 @@ def isReleaseBuild() {
  * limitations under the License.
  */
 
-allprojects {
-  group = GROUP
-  version = VERSION_CODE
+package com.github.amlcurran.showcaseview;
 
-  repositories {
-    mavenCentral()
-  }
+import android.graphics.Point;
+import android.view.View;
 
-  tasks.withType(Compile) {
-    options.encoding = "UTF-8"
-  }
+/**
+ * Calculates various items for use with ShowcaseView
+ */
+class Calculator {
+
+    static Point getShowcasePointFromView(View view) {
+        Point result = new Point();
+        result.x = view.getLeft() + view.getWidth() / 2;
+        result.y = view.getTop() + view.getHeight() / 2;
+        return result;
+    }
+
 }

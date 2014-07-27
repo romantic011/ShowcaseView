@@ -1,7 +1,3 @@
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
-}
-
 /*
  * Copyright 2014 Alex Curran
  *
@@ -18,15 +14,19 @@ def isReleaseBuild() {
  * limitations under the License.
  */
 
-allprojects {
-  group = GROUP
-  version = VERSION_CODE
+package com.github.amlcurran.showcaseview.targets;
 
-  repositories {
-    mavenCentral()
-  }
+import android.view.View;
+import android.view.ViewParent;
 
-  tasks.withType(Compile) {
-    options.encoding = "UTF-8"
-  }
+interface Reflector {
+    View getHomeButton();
+
+    void showcaseActionItem(int itemId);
+
+    ViewParent getActionBarView();
+
+    public enum ActionBarType {
+        STANDARD, APP_COMPAT, ACTIONBAR_SHERLOCK
+    }
 }

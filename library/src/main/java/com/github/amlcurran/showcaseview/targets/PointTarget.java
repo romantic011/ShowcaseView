@@ -14,35 +14,27 @@
  * limitations under the License.
  */
 
-buildscript {
-    repositories {
-        mavenCentral()
+package com.github.amlcurran.showcaseview.targets;
+
+import android.graphics.Point;
+
+/**
+ * Showcase a specific x/y co-ordinate on the screen.
+ */
+public class PointTarget implements Target {
+
+    private final Point mPoint;
+
+    public PointTarget(Point point) {
+        mPoint = point;
     }
 
-    dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.0'
+    public PointTarget(int xValue, int yValue) {
+        mPoint = new Point(xValue, yValue);
     }
-}
 
-apply plugin: 'com.android.library'
-apply plugin: 'maven'
-
-dependencies {
-    repositories {
-        mavenCentral()
-    }
-}
-
-android {
-    compileSdkVersion Integer.parseInt(COMPILE_SDK)
-    buildToolsVersion BUILD_TOOLS_VERSION
-
-    defaultConfig {
-        versionName VERSION_NAME
-        versionCode Integer.parseInt(VERSION_CODE)
-        targetSdkVersion Integer.parseInt(TARGET_SDK)
-        minSdkVersion Integer.parseInt(MIN_SDK)
+    @Override
+    public Point getPoint() {
+        return mPoint;
     }
 }
-
-apply from: 'gradle-mvn-push.gradle'

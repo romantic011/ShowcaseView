@@ -1,7 +1,3 @@
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
-}
-
 /*
  * Copyright 2014 Alex Curran
  *
@@ -18,15 +14,17 @@ def isReleaseBuild() {
  * limitations under the License.
  */
 
-allprojects {
-  group = GROUP
-  version = VERSION_CODE
+package com.github.amlcurran.showcaseview.targets;
 
-  repositories {
-    mavenCentral()
-  }
+import android.graphics.Point;
 
-  tasks.withType(Compile) {
-    options.encoding = "UTF-8"
-  }
+public interface Target {
+    Target NONE = new Target() {
+        @Override
+        public Point getPoint() {
+            return new Point(1000000, 1000000);
+        }
+    };
+
+    public Point getPoint();
 }

@@ -1,7 +1,3 @@
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
-}
-
 /*
  * Copyright 2014 Alex Curran
  *
@@ -18,15 +14,23 @@ def isReleaseBuild() {
  * limitations under the License.
  */
 
-allprojects {
-  group = GROUP
-  version = VERSION_CODE
+package com.github.amlcurran.showcaseview;
 
-  repositories {
-    mavenCentral()
-  }
+import android.graphics.Point;
+import android.view.View;
 
-  tasks.withType(Compile) {
-    options.encoding = "UTF-8"
-  }
+interface AnimationFactory {
+    void fadeInView(View target, long duration, AnimationStartListener listener);
+
+    void fadeOutView(View target, long duration, AnimationEndListener listener);
+
+    void animateTargetToPoint(ShowcaseView showcaseView, Point point);
+
+    public interface AnimationStartListener {
+        void onAnimationStart();
+    }
+
+    public interface AnimationEndListener {
+        void onAnimationEnd();
+    }
 }

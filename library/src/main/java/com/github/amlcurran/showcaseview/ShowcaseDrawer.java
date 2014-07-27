@@ -1,7 +1,3 @@
-def isReleaseBuild() {
-    return version.contains("SNAPSHOT") == false
-}
-
 /*
  * Copyright 2014 Alex Curran
  *
@@ -18,15 +14,29 @@ def isReleaseBuild() {
  * limitations under the License.
  */
 
-allprojects {
-  group = GROUP
-  version = VERSION_CODE
+package com.github.amlcurran.showcaseview;
 
-  repositories {
-    mavenCentral()
-  }
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
-  tasks.withType(Compile) {
-    options.encoding = "UTF-8"
-  }
+/**
+ * Created by curraa01 on 13/10/2013.
+ */
+interface ShowcaseDrawer {
+
+    void setShowcaseColour(int color);
+
+    void drawShowcase(Bitmap buffer, float x, float y, float scaleMultiplier);
+
+    int getShowcaseWidth();
+
+    int getShowcaseHeight();
+
+    float getBlockedRadius();
+
+    void setBackgroundColour(int backgroundColor);
+
+    void erase(Bitmap bitmapBuffer);
+
+    void drawToCanvas(Canvas canvas, Bitmap bitmapBuffer);
 }
